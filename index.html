@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Darou Salam — Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c8993a;
+      --gold-light: #e8c068;
+      --dark: #1a1208;
+      --dark-2: #241a0a;
+      --dark-3: #2e2010;
+      --cream: #f5ead8;
+      --cream-2: #ede0c8;
+      --text: #3a2c10;
+      --muted: #7a6540;
+      --radius: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(160deg, #1a1208 0%, #2e1a04 50%, #1a1208 100%);
+      padding: 60px 20px 50px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,153,58,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: var(--dark-2);
+      padding: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 40px rgba(200,153,58,0.35);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+    .hero-sub {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .divider-gold {
+      width: 80px; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 22px auto 0;
+    }
+
+    /* ── NAV PILLS ── */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26,18,8,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,153,58,0.2);
+      padding: 0 12px;
+    }
+    .nav-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scrollbar-width: none;
+    }
+    .nav-scroll::-webkit-scrollbar { display: none; }
+    .nav-pill {
+      flex-shrink: 0;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(200,153,58,0.4);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+      background: transparent;
+    }
+    .nav-pill:hover, .nav-pill.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--dark);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px 16px 80px;
+    }
+
+    /* ── CATEGORY BLOCK ── */
+    .category {
+      margin-bottom: 48px;
+    }
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .cat-header::before, .cat-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,153,58,0.4));
+    }
+    .cat-header::after {
+      background: linear-gradient(270deg, transparent, rgba(200,153,58,0.4));
+    }
+    .cat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      white-space: nowrap;
+      background: var(--dark-2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(200,153,58,0.35);
+    }
+
+    /* ── SECTION LABEL (sub-heading) ── */
+    .section-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 28px 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(200,153,58,0.25);
+    }
+
+    /* ── MENU ITEM ── */
+    .item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .item:hover {
+      background: rgba(200,153,58,0.07);
+    }
+    .item-name {
+      font-size: 0.95rem;
+      color: var(--cream);
+      flex: 1;
+      line-height: 1.4;
+    }
+    .item-dots {
+      flex: 1;
+      border-bottom: 1px dotted rgba(200,153,58,0.25);
+      margin: 0 8px 4px;
+      min-width: 20px;
+    }
+    .item-price {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gold-light);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .item-price-dual {
+      display: flex;
+      gap: 18px;
+    }
+    .price-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: block;
+      text-align: center;
+    }
+
+    /* pizza dual price header */
+    .pizza-header {
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+      padding: 0 14px 4px;
+    }
+    .pizza-header span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      width: 56px;
+      text-align: center;
+    }
+
+    /* ── MARKET PRICE ── */
+    .item-market {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── NOTE ── */
+    .note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 4px 14px;
+      font-style: italic;
+    }
+
+    /* ── PAGE SECTION TITLE ── */
+    .page-section {
+      margin-bottom: 56px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--gold-light);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .page-divider {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 32px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(200,153,58,0.15);
+    }
+    footer span { color: var(--gold); }
+
+    @media (max-width: 480px) {
+      .item-name { font-size: 0.88rem; }
+      .item-price { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <img src="https://res.cloudinary.com/dnsrrkngj/image/upload/v1775228175/mnoam78xow067hdgui35.png"
+       alt="Darou Salam Logo" class="hero-logo" />
+  <h1>Darou Salam</h1>
+  <p class="hero-sub">Restaurant &amp; Fast-Food — Dakar</p>
+  <div class="divider-gold"></div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-wrap">
+  <div class="nav-scroll">
+    <a class="nav-pill" href="#entrees">Entrées</a>
+    <a class="nav-pill" href="#viandes">Viandes</a>
+    <a class="nav-pill" href="#poissons">Poissons</a>
+    <a class="nav-pill" href="#crustaces">Crustacés</a>
+    <a class="nav-pill" href="#pates">Pâtes</a>
+    <a class="nav-pill" href="#fastfood">Fast-Foods</a>
+    <a class="nav-pill" href="#pizzas">Pizzas</a>
+    <a class="nav-pill" href="#poulets">Poulets</a>
+    <a class="nav-pill" href="#matin">Matin</a>
+    <a class="nav-pill" href="#viennoiseries">Viennoiseries</a>
+    <a class="nav-pill" href="#boissons">Boissons</a>
+    <a class="nav-pill" href="#salades">Salades</a>
+    <a class="nav-pill" href="#crepes">Crêpes</a>
+    <a class="nav-pill" href="#subs">Subs</a>
+    <a class="nav-pill" href="#desserts">Desserts</a>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ══════════════════════════════════ -->
+  <!--  PAGE 1 · ENTRÉES & PLATS         -->
+  <!-- ══════════════════════════════════ -->
+
+  <!-- ENTRÉES CHAUDES -->
+  <section id="entrees" class="page-section">
+    <div class="section-label">Nos Entrées Chaudes</div>
+    <div class="item"><span class="item-name">Soupe de viande</span><span class="item-dots"></span><span class="item-price">3.500f</span></div>
+    <div class="item"><span class="item-name">Velouté de légumes</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+    <div class="item"><span class="item-name">Soupe de poisson</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+  </section>
+
+  <!-- VIANDES -->
+  <section id="viandes" class="page-section">
+    <div class="section-label">Nos Viandes</div>
+    <div class="item"><span class="item-name">Méchoui</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Souris d'agneau purée patate</span><span class="item-dots"></span><span class="item-price">6.500f</span></div>
+    <div class="item"><span class="item-name">Filet de bœuf</span><span class="item-dots"></span><span class="item-price">7.000f</span></div>
+    <div class="item"><span class="item-name">Brochette filet de bœuf</span><span class="item-dots"></span><span class="item-price">6.500f</span></div>
+    <div class="item"><span class="item-name">Brochette mixte</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Work de bœuf</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Cordon bleu de bœuf</span><span class="item-dots"></span><span class="item-price">7.500f</span></div>
+    <div class="item"><span class="item-name">Bœuf aux légumes</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Bœuf au basilic</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+  </section>
+
+  <!-- POISSONS -->
+  <section id="poissons" class="page-section">
+    <div class="section-label">Nos Poissons</div>
+    <div class="item"><span class="item-name">Filet de poisson grillé ou pané</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Brochette de poisson</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Blanquette de poisson</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Thief du jour <span style="font-size:0.8rem;color:var(--muted)">(30mn d'attente)</span></span><span class="item-dots"></span><span class="item-market">………</span></div>
+    <div class="item"><span class="item-name">Dorade grillé <span style="font-size:0.8rem;color:var(--muted)">(30mn d'attente)</span></span><span class="item-dots"></span><span class="item-market">………</span></div>
+    <div class="item"><span class="item-name">Capitaine grillé <span style="font-size:0.8rem;color:var(--muted)">(30mn d'attente)</span></span><span class="item-dots"></span><span class="item-market">………</span></div>
+  </section>
+
+  <!-- CRUSTACÉS -->
+  <section id="crustaces" class="page-section">
+    <div class="section-label">Nos Crustacés</div>
+    <div class="item"><span class="item-name">Gambas Grillées</span><span class="item-dots"></span><span class="item-price">9.000f</span></div>
+    <div class="item"><span class="item-name">Crevette à l'ail</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Crevette à la crème</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Crevette provençal à la crème</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Gratin aux fruits de mer</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Langouste grillée au feu de bois</span><span class="item-dots"></span><span class="item-market">Marché</span></div>
+  </section>
+
+  <!-- PÂTES -->
+  <section id="pates" class="page-section">
+    <div class="section-label">Nos Pâtes</div>
+    <div class="item"><span class="item-name">Lasagne bolognaise</span><span class="item-dots"></span><span class="item-price">5.000f</span></div>
+    <div class="item"><span class="item-name">Tagliatelle aux fruits de mer</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Spaghetti bolognaise</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Spaghetti jambon / fromage</span><span class="item-dots"></span><span class="item-price">3.500f</span></div>
+    <div class="item"><span class="item-name">Poulet aux pattes</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Ravioli de crevette</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+  </section>
+
+  <!-- ══════════════════════════════════ -->
+  <!--  PAGE 2 · FAST-FOOD, PIZZA, POULET -->
+  <!-- ══════════════════════════════════ -->
+
+  <!-- FAST-FOODS -->
+  <section id="fastfood" class="page-section">
+    <div class="section-label">Nos Fast-Foods</div>
+    <div class="item"><span class="item-name">Hamburger Royal</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Hamburger Royal poulet</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Double Burger royal</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+    <div class="item"><span class="item-name">Hamburger sur assiette</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+    <div class="item"><span class="item-name">Macdo Burger</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+    <div class="item"><span class="item-name">Chawarma Simple</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Chawarma Royal</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Chawarma poulet</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Chawarma poulet royal</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Chawarma Sur Assiette (Poulet – Viande)</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+    <div class="item"><span class="item-name">Hot-dog norvégienne</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Hot-dog norvégienne (plus)</span><span class="item-dots"></span><span class="item-price">2.000f</span></div>
+    <div class="item"><span class="item-name">Sandwich (viande – Poulet)</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Sandwich Double (viande – Poulet)</span><span class="item-dots"></span><span class="item-price">2.000f</span></div>
+    <div class="item"><span class="item-name">Tacos (Poulet – Viande – Jambon)</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+    <div class="item"><span class="item-name">Tacos Mixtes</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+  </section>
+
+  <!-- PIZZAS -->
+  <section id="pizzas" class="page-section">
+    <div class="section-label">Nos Pizzas</div>
+    <div class="pizza-header"><span>PM</span><span>GM</span></div>
+    <div class="item"><span class="item-name">Pizza Margarita</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">3.000f</span><span class="item-price">5.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza reine</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">3.500f</span><span class="item-price">5.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza bolognaise</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">3.500f</span><span class="item-price">5.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza fermière</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">3.500f</span><span class="item-price">5.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza 4 Fromages</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">4.000f</span><span class="item-price">6.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza du pêcheur</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">4.000f</span><span class="item-price">6.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza Saint-Louisienne</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">4.000f</span><span class="item-price">6.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza Darou Salam</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">4.000f</span><span class="item-price">6.000f</span></div></div>
+    <div class="item"><span class="item-name">Pizza charcutière</span><span class="item-dots"></span><div class="item-price-dual"><span class="item-price">4.000f</span><span class="item-price">6.000f</span></div></div>
+  </section>
+
+  <!-- POULETS -->
+  <section id="poulets" class="page-section">
+    <div class="section-label">Nos Poulets</div>
+    <div class="item"><span class="item-name">Poulet entier</span><span class="item-dots"></span><span class="item-price">7.500f</span></div>
+    <div class="item"><span class="item-name">Demi Poulet grillé</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Quart de Poulet grillé</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+    <div class="item"><span class="item-name">Brochette de volaille</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Escalope de poulet pané</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+    <div class="item"><span class="item-name">Cordon bleu de volaille</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Canard confit à l'orange</span><span class="item-dots"></span><span class="item-price">6.000f</span></div>
+    <div class="item"><span class="item-name">Fricasse de volaille</span><span class="item-dots"></span><span class="item-price">4.000f</span></div>
+  </section>
+
+  <!-- ══════════════════════════════════ -->
+  <!--  PAGE 3 · INSTANT MATIN           -->
+  <!-- ══════════════════════════════════ -->
+
+  <section id="matin" class="page-section">
+    <div class="section-label">Instant Matin — Omelettes</div>
+    <div class="item"><span class="item-name">Omelette Espagnol</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Omelette fromage</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Omelette Jambon</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Omelette Jambon fromage</span><span class="item-dots"></span><span class="item-price">2.000f</span></div>
+    <div class="item"><span class="item-name">Œuf sur le plat</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Œuf nature sur le plat</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+  </section>
+
+  <!-- VIENNOISERIES -->
+  <section id="viennoiseries" class="page-section">
+    <div class="section-label">Nos Viennoiseries</div>
+    <div class="item"><span class="item-name">Croissant beurre</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+    <div class="item"><span class="item-name">Pain au chocolat</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+    <div class="item"><span class="item-name">Pain raisin</span><span class="item-dots"></span><span class="item-price">600f</span></div>
+    <div class="item"><span class="item-name">Jésuite</span><span class="item-dots"></span><span class="item-price">600f</span></div>
+    <div class="item"><span class="item-name">Drops choco</span><span class="item-dots"></span><span class="item-price">600f</span></div>
+    <div class="item"><span class="item-name">Pomme coco</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+    <div class="item"><span class="item-name">Palmier</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+    <div class="item"><span class="item-name">Beignet à la crème</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+    <div class="item"><span class="item-name">Beignet Nutella</span><span class="item-dots"></span><span class="item-price">600f</span></div>
+    <div class="item"><span class="item-name">Rochet coco</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+    <div class="item"><span class="item-name">Choco amande</span><span class="item-dots"></span><span class="item-price">600f</span></div>
+    <div class="item"><span class="item-name">Croissant amande</span><span class="item-dots"></span><span class="item-price">600f</span></div>
+    <div class="item"><span class="item-name">Dadish</span><span class="item-dots"></span><span class="item-price">700f</span></div>
+    <div class="item"><span class="item-name">Sachet madeleine</span><span class="item-dots"></span><span class="item-price">1.200f</span></div>
+    <div class="item"><span class="item-name">Cake GM</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+    <div class="item"><span class="item-name">Cake Pm</span><span class="item-dots"></span><span class="item-price">300f</span></div>
+
+    <div class="section-label" style="margin-top:32px">Nos Extras</div>
+    <div class="item"><span class="item-name">Croque monsieur</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Croque madame</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Croissant jambon</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+  </section>
+
+  <!-- BOISSONS CHAUDES -->
+  <section id="boissons" class="page-section">
+    <div class="section-label">Nos Boissons Chaudes</div>
+    <div class="item"><span class="item-name">Thé Lipton</span><span class="item-dots"></span><span class="item-price">700f</span></div>
+    <div class="item"><span class="item-name">Thé Darou Salam</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Thé parfumeur</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Expresso</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Café allongé</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Café au lait</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Lait chaud</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Chocolat chaud</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Capuccino</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+
+    <div class="section-label" style="margin-top:32px">Nos Boissons Fraîches</div>
+    <div class="item"><span class="item-name">Coca-Cola / Fanta / Sprite</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Eau minérale</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+    <div class="item"><span class="item-name">Jus de fruits naturels</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Jus locaux (bissap, gingembre…)</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+  </section>
+
+  <!-- ══════════════════════════════════ -->
+  <!--  PAGE 5 · SALADES & DESSERTS      -->
+  <!-- ══════════════════════════════════ -->
+
+  <!-- SALADES -->
+  <section id="salades" class="page-section">
+    <div class="section-label">Nos Salades</div>
+    <div class="item"><span class="item-name">Salade verte</span><span class="item-dots"></span><span class="item-price">2.000f</span></div>
+    <div class="item"><span class="item-name">Salade Darou Salam</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+    <div class="item"><span class="item-name">Salade niçoise</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+    <div class="item"><span class="item-name">Salade de tomate</span><span class="item-dots"></span><span class="item-price">2.000f</span></div>
+    <div class="item"><span class="item-name">Salade avocat</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+    <div class="item"><span class="item-name">Salade mixte</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+  </section>
+
+  <!-- CRÊPES SALÉES -->
+  <section id="crepes" class="page-section">
+    <div class="section-label">Nos Crêpes Salées</div>
+    <div class="item"><span class="item-name">Crêpe jambon</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Crêpe fromage</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Crêpe mixte</span><span class="item-dots"></span><span class="item-price">2.000f</span></div>
+  </section>
+
+  <!-- SUBS -->
+  <section id="subs" class="page-section">
+    <div class="section-label">Nos Subs</div>
+    <div class="item"><span class="item-name">Sub Poulet / Viande</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+    <div class="item"><span class="item-name">Sub Mixte</span><span class="item-dots"></span><span class="item-price">3.000f</span></div>
+
+    <div class="section-label" style="margin-top:32px">Nos Accompagnements</div>
+    <div class="item"><span class="item-name">Frites / Riz / Légumes / Semoule</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+
+    <div class="section-label" style="margin-top:32px">Nos Sauces Maison</div>
+    <div class="item"><span class="item-name">Sauce Champignon</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Sauce Poivre</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Sauce Darou Salam</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+    <div class="item"><span class="item-name">Sauce Légumes</span><span class="item-dots"></span><span class="item-price">1.000f</span></div>
+  </section>
+
+  <!-- DESSERTS -->
+  <section id="desserts" class="page-section">
+    <div class="section-label">Nos Desserts</div>
+    <div class="item"><span class="item-name">Fondant au chocolat</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+    <div class="item"><span class="item-name">Tiramisu</span><span class="item-dots"></span><span class="item-price">2.500f</span></div>
+    <div class="item"><span class="item-name">Crème brûlée</span><span class="item-dots"></span><span class="item-price">2.000f</span></div>
+    <div class="item"><span class="item-name">Salade de fruits</span><span class="item-dots"></span><span class="item-price">1.500f</span></div>
+    <div class="item"><span class="item-name">Glace (boule)</span><span class="item-dots"></span><span class="item-price">500f</span></div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 <span>Darou Salam</span> — Tous droits réservés</p>
+</footer>
+
+<script>
+  // Active nav pill on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const pills = document.querySelectorAll('.nav-pill');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        pills.forEach(p => p.classList.remove('active'));
+        const active = document.querySelector(`.nav-pill[href="#${e.target.id}"]`);
+        if (active) {
+          active.classList.add('active');
+          active.scrollIntoView({ inline: 'nearest', behavior: 'smooth' });
+        }
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
