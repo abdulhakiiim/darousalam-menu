@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Hôtel Dior · Livret d'accueil (démo)</title>
+<meta name="description" content="Maquette de livret d'accueil NFC pour l'Hôtel Dior, Saint-Louis — proposition Kanzu Digital">
+<meta name="theme-color" content="#a8492a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1e9; --card:#ffffff; --ink:#2a211c; --muted:#77695f; --line:#e9dfd2;
+  --brand:#a8492a;      /* terre cuite du logo */
+  --ocean:#1f6fa8;      /* bleu « Saint-Louis du Sénégal » */
+  --sun:#fe6000;        /* orange du site */
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#16120f; --card:#211b17; --ink:#f3ece5; --muted:#b3a597; --line:#33291f; --brand:#d0714d; --ocean:#5aa6dc; }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.demo{background:#2a211c;color:#f6f1e9;font-size:12px;text-align:center;padding:6px 12px;letter-spacing:.02em}
+.demo a{color:#ffb98c}
+
+/* En-tête */
+.hero{position:relative;height:260px;background:#1f6fa8 linear-gradient(160deg,#1f6fa8,#a8492a);overflow:hidden}
+.hero img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(20,12,8,.72))}
+.hero .txt{position:absolute;left:16px;right:16px;bottom:58px;z-index:1;color:#fff}
+.hero .kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.hero h1{font:700 34px/1.05 "Cormorant Garamond",Georgia,serif;margin:4px 0 2px}
+.hero p{margin:0;font-size:15px;opacity:.92}
+.lang{position:absolute;top:12px;right:12px;z-index:2;display:flex;gap:4px}
+.lang button{border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.25);color:#fff;border-radius:20px;padding:4px 11px;font:600 13px/1.4 inherit;cursor:pointer}
+.lang button.on{background:#fff;color:var(--brand)}
+.logo{position:absolute;top:12px;left:12px;z-index:2;background:rgba(255,255,255,.94);border-radius:12px;padding:6px 10px;display:flex}
+.logo img{height:30px;width:auto;display:block}
+
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 40px}
+.actions{position:relative;z-index:3;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:-42px}
+.act{background:var(--card);border-radius:var(--radius);padding:14px;text-decoration:none;color:var(--ink);
+  box-shadow:0 4px 16px rgba(42,33,28,.10);display:flex;flex-direction:column;gap:2px;border:0;text-align:left;font:inherit;cursor:pointer}
+.act .ico{font-size:22px;line-height:1.2}
+.act b{font-size:15px}
+.act small{color:var(--muted);font-size:13px}
+
+section{background:var(--card);border-radius:var(--radius);margin-top:14px;border:1px solid var(--line)}
+details summary{list-style:none;padding:16px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--muted);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+.body{padding:0 16px 16px}
+.body p{margin:0 0 10px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row span:first-child{color:var(--muted)}
+.row b{text-align:right}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}
+.chip{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:14px}
+.trip{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.trip:first-child{border-top:0}
+.trip .e{font-size:22px}
+.trip b{display:block}
+.trip small{color:var(--muted)}
+.btn{display:block;text-align:center;background:var(--brand);color:#fff;text-decoration:none;padding:13px;border-radius:12px;font-weight:700;margin-top:12px}
+.btn.alt{background:var(--ocean)}
+.btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+ul{margin:0;padding-left:20px}
+li{margin:4px 0}
+.review{text-align:center;padding:22px 16px}
+.review h2{margin:0 0 6px;font:700 24px/1.15 "Cormorant Garamond",Georgia,serif;color:var(--brand)}
+.review p{margin:0;color:var(--muted)}
+.review .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:24px}
+footer a{color:var(--brand);font-weight:700;text-decoration:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+  padding:10px 16px;border-radius:24px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.show{opacity:1}
+body:not(.en) [data-en]{display:none!important}
+body.en [data-fr]{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="demo">
+  <span data-fr>Maquette de démonstration · non officielle · proposée par <a href="https://innov-card.com/kanzudigital" target="_blank" rel="noopener">Kanzu Digital</a></span>
+  <span data-en>Demo mock-up · not official · by <a href="https://innov-card.com/kanzudigital" target="_blank" rel="noopener">Kanzu Digital</a></span>
+</div>
+
+<header class="hero">
+  <img class="photo" src="https://www.hotel-dior-senegal.com/local/cache-gd2/9d/8431426b6410be5a15bc027dd80409.jpg" alt="" onerror="this.remove()">
+  <div class="logo"><img src="https://www.hotel-dior-senegal.com/local/cache-vignettes/L399xH81/hotel-dior-a6bd1.png" alt="Hôtel Dior" onerror="this.parentNode.remove()"></div>
+  <div class="lang">
+    <button id="bFR" class="on" onclick="setLang('fr')">FR</button>
+    <button id="bEN" onclick="setLang('en')">EN</button>
+  </div>
+  <div class="txt">
+    <div class="kicker" data-fr>Bienvenue · Depuis 1993</div><div class="kicker" data-en>Welcome · Since 1993</div>
+    <h1>Hôtel Dior</h1>
+    <p data-fr>Langue de Barbarie, entre le fleuve et l'océan</p>
+    <p data-en>Langue de Barbarie, between the river and the ocean</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="actions">
+    <button class="act" onclick="copyWifi()">
+      <span class="ico">📶</span><b>Wi-Fi</b><small id="wifiHint"></small>
+    </button>
+    <a class="act" id="lnkDesk" href="#">
+      <span class="ico">🛎️</span><b data-fr>Réception</b><b data-en>Front desk</b><small>WhatsApp</small>
+    </a>
+    <a class="act" href="#resto" onclick="openSec('resto')">
+      <span class="ico">🍤</span><b data-fr>Restaurant & bar</b><b data-en>Restaurant & bar</b>
+      <small data-fr>Poissons, fruits de mer</small><small data-en>Fish & seafood</small>
+    </a>
+    <a class="act" href="#sorties" onclick="openSec('sorties')">
+      <span class="ico">🛶</span><b data-fr>Excursions</b><b data-en>Excursions</b>
+      <small data-fr>Djoudj, pirogue, calèche</small><small data-en>Djoudj, canoe, carriage</small>
+    </a>
+  </div>
+
+  <!-- Séjour -->
+  <section><details open>
+    <summary><span data-fr>🏨 Votre séjour</span><span data-en>🏨 Your stay</span></summary>
+    <div class="body">
+      <div class="row"><span data-fr>Arrivée</span><span data-en>Check-in</span><b data-fr>dès 13h30</b><b data-en>from 1:30 PM</b></div>
+      <div class="row"><span data-fr>Départ</span><span data-en>Check-out</span><b data-fr>avant 12h</b><b data-en>before 12 PM</b></div>
+      <div class="row"><span data-fr>Petit-déjeuner buffet</span><span data-en>Breakfast buffet</span><b data-fr>inclus</b><b data-en>included</b></div>
+      <div class="row"><span>Wi-Fi</span><b data-fr>gratuit</b><b data-en>free</b></div>
+      <div class="row"><span data-fr>Parking</span><span data-en>Parking</span><b data-fr>gratuit</b><b data-en>free</b></div>
+      <div class="row"><span data-fr>Piscine & plage privée</span><span data-en>Pool & private beach</span><b data-fr>accès libre</b><b data-en>open to guests</b></div>
+      <div class="row"><span data-fr>Taxe de séjour</span><span data-en>Tourist tax</span><b data-fr>1 000 F / pers. / nuit</b><b data-en>1,000 F / person / night</b></div>
+      <a class="btn ghost" id="lnkLate" href="#"><span data-fr>Demander un départ tardif</span><span data-en>Request a late check-out</span></a>
+    </div>
+  </details></section>
+
+  <!-- Restaurant -->
+  <section id="resto"><details>
+    <summary><span data-fr>🍽️ Restaurant & bar</span><span data-en>🍽️ Restaurant & bar</span></summary>
+    <div class="body">
+      <p data-fr>Cuisine du marché, au gré de la pêche du jour. Service en salle, en terrasse ou au bord de la piscine.</p>
+      <p data-en>Market cuisine, following the day's catch. Served indoors, on the terrace or by the pool.</p>
+      <div class="chips" data-fr>
+        <span class="chip">Thiéboudiène Penda Mbaye</span><span class="chip">Poissons grillés</span>
+        <span class="chip">Fruits de mer</span><span class="chip">Grillades</span><span class="chip">Plat du jour</span>
+        <span class="chip">Dîner en plein air</span><span class="chip">Lakh au petit-déjeuner</span>
+      </div>
+      <div class="chips" data-en>
+        <span class="chip">Thieboudienne Penda Mbaye</span><span class="chip">Grilled fish</span>
+        <span class="chip">Seafood</span><span class="chip">Grills</span><span class="chip">Dish of the day</span>
+        <span class="chip">Open-air dinner</span><span class="chip">Lakh at breakfast</span>
+      </div>
+      <a class="btn alt" id="lnkMenu" href="#"><span data-fr>Voir la carte et les prix</span><span data-en>See the menu & prices</span></a>
+      <a class="btn" id="lnkTable" href="#"><span data-fr>Réserver une table · commander</span><span data-en>Book a table · order</span></a>
+    </div>
+  </details></section>
+
+  <!-- Excursions -->
+  <section id="sorties"><details>
+    <summary><span data-fr>🗺️ Excursions & transferts</span><span data-en>🗺️ Excursions & transfers</span></summary>
+    <div class="body">
+      <div class="trip"><span class="e">🦩</span><div><b data-fr>Parc des oiseaux du Djoudj</b><b data-en>Djoudj bird sanctuary</b>
+        <small data-fr>Journée, pique-nique possible · nov. à avril</small><small data-en>Full day, picnic option · Nov to April</small></div></div>
+      <div class="trip"><span class="e">🛶</span><div><b data-fr>Pirogue sur la Langue de Barbarie</b><b data-en>Canoe on the Langue de Barbarie</b>
+        <small data-fr>Mangrove et îles du fleuve</small><small data-en>Mangroves and river islands</small></div></div>
+      <div class="trip"><span class="e">🐎</span><div><b data-fr>Tour de l'île en calèche</b><b data-en>Island tour by horse carriage</b>
+        <small data-fr>Avec guide certifié, en plusieurs langues</small><small data-en>With a certified multilingual guide</small></div></div>
+      <div class="trip"><span class="e">🎣</span><div><b data-fr>Quartier des pêcheurs de Guet Ndar</b><b data-en>Guet Ndar fishermen's district</b>
+        <small data-fr>Retour des pirogues en fin d'après-midi</small><small data-en>Canoes return late afternoon</small></div></div>
+      <div class="trip"><span class="e">🚢</span><div><b data-fr>Croisière Bou El Mogdad</b><b data-en>Bou El Mogdad river cruise</b>
+        <small data-fr>Vers Richard Toll, Dagana, Podor</small><small data-en>To Richard Toll, Dagana, Podor</small></div></div>
+      <div class="trip"><span class="e">🚐</span><div><b data-fr>Transferts aéroport et Dakar</b><b data-en>Airport & Dakar transfers</b>
+        <small data-fr>Chauffeurs de confiance, prix annoncé</small><small data-en>Trusted drivers, fixed price</small></div></div>
+      <a class="btn" id="lnkTrip" href="#"><span data-fr>Réserver auprès de la réception</span><span data-en>Book with the front desk</span></a>
+    </div>
+  </details></section>
+
+  <!-- Événements -->
+  <section><details>
+    <summary><span data-fr>🎉 Séminaires & événements</span><span data-en>🎉 Meetings & events</span></summary>
+    <div class="body">
+      <p data-fr>Séminaires, anniversaires, mariages : l'hôtel organise vos événements sur mesure, en bord de mer.</p>
+      <p data-en>Seminars, birthdays, weddings: tailor-made events by the sea.</p>
+      <a class="btn alt" id="lnkEvent" href="#"><span data-fr>Demander un devis</span><span data-en>Request a quote</span></a>
+    </div>
+  </details></section>
+
+  <!-- Infos pratiques -->
+  <section><details>
+    <summary><span data-fr>📋 Infos pratiques & urgences</span><span data-en>📋 Practical info & emergencies</span></summary>
+    <div class="body">
+      <div class="row"><span data-fr>Réception (fixe)</span><span data-en>Front desk</span><a href="tel:+221339613118"><b>33 961 31 18</b></a></div>
+      <div class="row"><span>WhatsApp</span><a id="telWa" href="#"><b id="telWaTxt"></b></a></div>
+      <div class="row"><span data-fr>Police</span><span data-en>Police</span><a href="tel:17"><b>17</b></a></div>
+      <div class="row"><span data-fr>Pompiers</span><span data-en>Fire brigade</span><a href="tel:18"><b>18</b></a></div>
+      <div class="row"><span>SAMU</span><a href="tel:1515"><b>1515</b></a></div>
+      <a class="btn ghost" id="lnkMap" href="#" target="_blank" rel="noopener"><span data-fr>📍 Itinéraire vers l'hôtel</span><span data-en>📍 Directions to the hotel</span></a>
+    </div>
+  </details></section>
+
+  <!-- Avis -->
+  <section class="review">
+    <h2 data-fr>Un beau séjour ?</h2><h2 data-en>Enjoyed your stay?</h2>
+    <p data-fr>Votre avis aide d'autres voyageurs à nous trouver. Merci !</p>
+    <p data-en>Your review helps other travellers find us. Thank you!</p>
+    <div class="two">
+      <a class="btn" id="lnkGoogle" href="#" target="_blank" rel="noopener">⭐ Google</a>
+      <a class="btn alt" id="lnkTA" href="#" target="_blank" rel="noopener">⭐ Tripadvisor</a>
+    </div>
+    <a class="btn ghost" id="lnkFeedback" href="#"><span data-fr>Un souci ? Dites-le-nous d'abord</span><span data-en>Any issue? Tell us first</span></a>
+  </section>
+
+  <footer id="credit"></footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ====== Données de l'établissement (à valider avec l'hôtel) ====== */
+const CONFIG = {
+  name:       "Hôtel Dior",
+  wifiPass:   "",                 // vide = « code à la réception »
+  waPhone:    "221784685343",     // WhatsApp réception (site officiel)
+  lat: 15.997764, lng: -16.5102889,
+  menuUrl:    "",                 // lien du menu digital (vide = demande par WhatsApp)
+  googleUrl:  "https://maps.google.com/?cid=8437577842977840301",
+  taUrl:      "https://www.tripadvisor.com/Hotel_Review-g304072-d1813673-Reviews-Hotel_Dior-Saint_Louis_Saint_Louis_Region.html",
+  creditName: "Kanzu Digital",
+  creditUrl:  "https://innov-card.com/kanzudigital"
+};
+/* ================================================================ */
+
+let lang = "fr";
+const $ = (id) => document.getElementById(id);
+const L = (fr, en) => lang === "fr" ? fr : en;
+function wa(text){ return "https://wa.me/" + CONFIG.waPhone + "?text=" + encodeURIComponent(text); }
+
+function render(){
+  $("wifiHint").textContent = CONFIG.wifiPass ? L("Toucher pour copier","Tap to copy") : L("Code à la réception","Code at front desk");
+  $("lnkDesk").href  = wa(L("Bonjour, je séjourne à l'Hôtel Dior (chambre ...). ","Hello, I'm staying at Hôtel Dior (room ...). "));
+  $("lnkLate").href  = wa(L("Bonjour, je souhaite un départ tardif (chambre ...). Est-ce possible ?","Hello, could I have a late check-out (room ...)?"));
+  $("lnkTable").href = wa(L("Bonjour, je souhaite réserver une table / commander : ","Hello, I'd like to book a table / order: "));
+  $("lnkMenu").href  = CONFIG.menuUrl || wa(L("Bonjour, pouvez-vous m'envoyer la carte du restaurant ?","Hello, could you send me the restaurant menu?"));
+  $("lnkTrip").href  = wa(L("Bonjour, je souhaite réserver une excursion / un transfert : ","Hello, I'd like to book an excursion / transfer: "));
+  $("lnkEvent").href = wa(L("Bonjour, je souhaite un devis pour un événement : ","Hello, I'd like a quote for an event: "));
+  $("lnkFeedback").href = wa(L("Bonjour, je souhaite vous signaler : ","Hello, I'd like to let you know: "));
+  $("lnkMap").href   = "https://www.google.com/maps/dir/?api=1&destination=" + CONFIG.lat + "," + CONFIG.lng;
+  $("lnkGoogle").href = CONFIG.googleUrl;
+  $("lnkTA").href    = CONFIG.taUrl;
+  $("telWa").href    = "https://wa.me/" + CONFIG.waPhone;
+  $("telWaTxt").textContent = "+" + CONFIG.waPhone.replace(/^221(\d{2})(\d{3})(\d{2})(\d{2})$/, "221 $1 $2 $3 $4");
+  const c = $("credit");
+  c.textContent = L("Livret d'accueil NFC propulsé par ","NFC welcome guide by ");
+  const a = document.createElement("a");
+  a.href = CONFIG.creditUrl; a.target = "_blank"; a.rel = "noopener"; a.textContent = CONFIG.creditName;
+  c.appendChild(a);
+}
+
+function setLang(l){
+  lang = l;
+  document.body.classList.toggle("en", l === "en");
+  document.documentElement.lang = l;
+  $("bFR").classList.toggle("on", l === "fr");
+  $("bEN").classList.toggle("on", l === "en");
+  try { localStorage.setItem("lang", l); } catch(e){}
+  render();
+}
+
+function openSec(id){ const d = document.querySelector("#" + id + " details"); if (d) d.open = true; }
+
+function toast(msg){
+  const el = $("toast"); el.textContent = msg; el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 1800);
+}
+
+function copyWifi(){
+  if (!CONFIG.wifiPass){ toast(L("Demandez le code Wi-Fi à la réception","Ask the front desk for the Wi-Fi code")); return; }
+  try { navigator.clipboard.writeText(CONFIG.wifiPass).then(() => toast(L("Mot de passe copié","Password copied")), () => toast(CONFIG.wifiPass)); }
+  catch(e){ toast(CONFIG.wifiPass); }
+}
+
+let saved = "fr";
+try { saved = localStorage.getItem("lang") || (navigator.language || "fr").slice(0,2); } catch(e){}
+setLang(saved === "en" ? "en" : "fr");
+</script>
+</body>
+</html>
