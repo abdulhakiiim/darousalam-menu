@@ -67,6 +67,10 @@ details[open] summary::after{content:"–"}
 .trip .e{font-size:22px}
 .trip b{display:block}
 .trip small{color:var(--muted)}
+.mcat{margin:12px 0 4px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ocean);font-weight:700}
+.mdish{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dotted var(--line)}
+.mdish.off{color:var(--muted);text-decoration:line-through}
+.mdish i{font-style:normal;font-weight:700;color:var(--brand);white-space:nowrap}
 .btn{display:block;text-align:center;background:var(--brand);color:#fff;text-decoration:none;padding:13px;border-radius:12px;font-weight:700;margin-top:12px}
 .btn.alt{background:var(--ocean)}
 .btn.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
@@ -157,6 +161,7 @@ body.en [data-fr]{display:none!important}
         <span class="chip">Seafood</span><span class="chip">Grills</span><span class="chip">Dish of the day</span>
         <span class="chip">Open-air dinner</span><span class="chip">Lakh at breakfast</span>
       </div>
+      <div id="menuList"></div>
       <a class="btn alt" id="lnkMenu" href="#"><span data-fr>Voir la carte et les prix</span><span data-en>See the menu & prices</span></a>
       <a class="btn" id="lnkTable" href="#"><span data-fr>Réserver une table · commander</span><span data-en>Book a table · order</span></a>
     </div>
@@ -230,6 +235,7 @@ const CONFIG = {
   waPhone:    "221784685343",     // WhatsApp réception (site officiel)
   lat: 15.997764, lng: -16.5102889,
   menuUrl:    "",                 // lien du menu digital (vide = demande par WhatsApp)
+  menuCsv:    "menu.csv",         // Google Sheet publié en CSV (modifiable par l'hôtel)
   googleUrl:  "https://maps.google.com/?cid=8437577842977840301",
   taUrl:      "https://www.tripadvisor.com/Hotel_Review-g304072-d1813673-Reviews-Hotel_Dior-Saint_Louis_Saint_Louis_Region.html",
   creditName: "Kanzu Digital",
@@ -263,6 +269,27 @@ function render(){
   c.appendChild(a);
 }
 
+var MENU = [];
+function parseCsv(t){
+  var rows = [], row = [], cur = "", q = false;
+  for (var i = 0; i < t.length; i++){ var c = t[i];
+    if (q){ if (c === '"' && t[i+1] === '"'){ cur += '"'; i++; } else if (c === '"'){ q = false; } else { cur += c; } }
+    else if (c === '"'){ q = true; } else if (c === ","){ row.push(cur); cur = ""; }
+    else if (c === "\n" || c === "\r"){ if (c === "\r" && t[i+1] === "\n") i++; row.push(cur); rows.push(row); row = []; cur = ""; }
+    else { cur += c; } }
+  if (cur || row.length){ row.push(cur); rows.push(row); }
+  var head = rows.shift().map(function(h){ return h.trim().toLowerCase(); });
+  return rows.filter(function(r){ return r.join("").trim(); }).map(function(r){ var o = {}; head.forEach(function(h, i){ o[h] = (r[i] || "").trim(); }); return o; });
+}
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function renderMenu(){
+  var cats = [], by = {};
+  MENU.forEach(function(d){ var c = /jour/i.test(d.categorie) ? L("Plat du jour","Dish of the day") : d.categorie; if (!by[c]){ by[c] = []; cats.push(c); } by[c].push(d); });
+  $("menuList").innerHTML = cats.map(function(c){ return '<div class="mcat">' + esc(c) + "</div>" + by[c].map(function(d){
+    return '<div class="mdish' + (/non/i.test(d.disponible) ? " off" : "") + '"><span>' + esc(L(d.plat, d.plat_en || d.plat)) + "</span><i>" + esc(d.prix) + " F</i></div>"; }).join(""); }).join("");
+}
+fetch(CONFIG.menuCsv + "?t=" + Date.now()).then(function(r){ return r.text(); }).then(function(t){ MENU = parseCsv(t); renderMenu(); }).catch(function(){});
+
 function setLang(l){
   lang = l;
   document.body.classList.toggle("en", l === "en");
@@ -270,7 +297,7 @@ function setLang(l){
   $("bFR").classList.toggle("on", l === "fr");
   $("bEN").classList.toggle("on", l === "en");
   try { localStorage.setItem("lang", l); } catch(e){}
-  render();
+  render(); if (MENU.length) renderMenu();
 }
 
 function openSec(id){ const d = document.querySelector("#" + id + " details"); if (d) d.open = true; }
