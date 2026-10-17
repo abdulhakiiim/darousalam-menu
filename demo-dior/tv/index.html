@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Hôtel Dior · Écran d'accueil (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="qrcode.js"></script>
+<style>
+/* Base 1920×1080 : 1rem = 20 px sur un écran Full HD, proportionnel ailleurs */
+html{font-size:calc(100vw / 96)}
+:root{
+  --night:#0f2233; --night2:#14324a; --sand:#f6f1e9; --muted:#a9b8c4;
+  --brand:#c8613a; --sun:#fe8a3d; --line:rgba(255,255,255,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--night);color:var(--sand);font-family:"Source Sans 3",Arial,sans-serif;
+  background-image:radial-gradient(ellipse at 85% -10%,rgba(200,97,58,.35),transparent 55%),linear-gradient(160deg,var(--night2),var(--night) 60%)}
+.app{display:grid;grid-template-columns:22rem 1fr;height:100vh}
+
+/* Colonne de navigation */
+nav{padding:2.2rem 1.6rem;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:.6rem;background:rgba(0,0,0,.15)}
+.logo{background:rgba(255,255,255,.94);border-radius:.8rem;padding:.6rem .9rem;display:flex;justify-content:center;margin-bottom:1.4rem;min-height:3.4rem;align-items:center}
+.logo img{height:2.4rem;display:block}
+.logo span{font:700 1.8rem "Cormorant Garamond",serif;color:#a8492a}
+.nav{all:unset;display:flex;align-items:center;gap:.9rem;padding:1rem 1.2rem;border-radius:.9rem;font-size:1.45rem;font-weight:600;color:var(--muted);cursor:pointer;border:2px solid transparent}
+.nav .i{font-size:1.6rem;width:2rem;text-align:center}
+.nav.on{color:#fff;background:rgba(255,255,255,.08)}
+.nav:focus,.nav.focus{outline:none;border-color:var(--sun);color:#fff;background:rgba(254,138,61,.18)}
+.navfoot{margin-top:auto;font-size:1rem;color:var(--muted);line-height:1.5}
+.navfoot b{color:var(--sand)}
+
+/* Zone de contenu */
+main{position:relative;padding:2.2rem 3rem 2rem;display:flex;flex-direction:column;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.6rem}
+.room{font-size:1.2rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.clock{text-align:right}
+.clock .t{font-size:3rem;font-weight:700;line-height:1}
+.clock .d{font-size:1.1rem;color:var(--muted);margin-top:.3rem}
+.clock .w{font-size:1.1rem;margin-top:.4rem}
+section{display:none;flex:1;min-height:0}
+section.on{display:flex;gap:2.6rem;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(.6rem)}to{opacity:1;transform:none}}
+.col{flex:1;min-width:0}
+h1{font:700 4.6rem/1 "Cormorant Garamond",serif;margin:.2rem 0 .8rem}
+h2{font:700 3rem/1.05 "Cormorant Garamond",serif;margin:0 0 1.2rem}
+.kicker{font-size:1.15rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);font-weight:700}
+p.lead{font-size:1.55rem;line-height:1.45;color:#dfe6ec;max-width:46rem;margin:0 0 1.4rem}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.card{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:1rem;padding:1.1rem 1.3rem}
+.card b{display:block;font-size:1.4rem;margin-bottom:.2rem}
+.card span{font-size:1.15rem;color:var(--muted)}
+.card .e{font-size:1.8rem;float:right;margin-left:.6rem}
+.dishes{columns:2;column-gap:2rem;font-size:1.45rem;line-height:1.9;margin:0;padding:0;list-style:none}
+.dishes li{break-inside:avoid;border-bottom:1px solid var(--line)}
+.note{font-size:1.1rem;color:var(--muted);margin-top:1rem}
+
+/* Encadré QR */
+.qr{width:19rem;flex:none;align-self:flex-start;background:var(--sand);color:var(--night);border-radius:1.2rem;padding:1.4rem;text-align:center}
+.qr .code{background:#fff;border-radius:.6rem;padding:.8rem;display:flex;justify-content:center}
+.qr .code svg{width:13rem;height:13rem;display:block}
+.qr b{display:block;font-size:1.45rem;margin:1rem 0 .3rem}
+.qr span{font-size:1.1rem;color:#4b5a66}
+
+.hint{position:absolute;left:3rem;bottom:1.4rem;font-size:1rem;color:var(--muted)}
+.hint kbd{border:1px solid var(--line);border-radius:.3rem;padding:0 .4rem;font-family:inherit}
+.demo{position:absolute;right:3rem;bottom:1.4rem;font-size:.95rem;color:var(--muted)}
+body:not(.en) [data-en]{display:none!important}
+body.en [data-fr]{display:none!important}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav id="nav">
+    <div class="logo"><img src="https://www.hotel-dior-senegal.com/local/cache-vignettes/L399xH81/hotel-dior-a6bd1.png" alt="Hôtel Dior" onerror="this.outerHTML='<span>Hôtel Dior</span>'"></div>
+    <button class="nav on" data-s="home"><span class="i">🏨</span><span data-fr>Accueil</span><span data-en>Welcome</span></button>
+    <button class="nav" data-s="resto"><span class="i">🍽️</span><span data-fr>Restaurant & bar</span><span data-en>Restaurant & bar</span></button>
+    <button class="nav" data-s="services"><span class="i">🛎️</span><span data-fr>Services</span><span data-en>Services</span></button>
+    <button class="nav" data-s="trips"><span class="i">🛶</span><span data-fr>Excursions</span><span data-en>Excursions</span></button>
+    <button class="nav" data-s="info"><span class="i">ℹ️</span><span data-fr>Infos pratiques</span><span data-en>Practical info</span></button>
+    <button class="nav" data-s="lang"><span class="i">🌐</span><span data-fr>English</span><span data-en>Français</span></button>
+    <div class="navfoot"><span data-fr>Réception</span><span data-en>Front desk</span> : <b>33 961 31 18</b><br>WhatsApp : <b id="waTxt"></b></div>
+  </nav>
+
+  <main>
+    <div class="top">
+      <div class="room" id="roomLbl"></div>
+      <div class="clock"><div class="t" id="time">--:--</div><div class="d" id="date"></div><div class="w" id="weather"></div></div>
+    </div>
+
+    <!-- Accueil -->
+    <section id="home" class="on">
+      <div class="col">
+        <div class="kicker" data-fr>Langue de Barbarie · depuis 1993</div><div class="kicker" data-en>Langue de Barbarie · since 1993</div>
+        <h1><span data-fr>Bienvenue</span><span data-en>Welcome</span><span id="guest"></span></h1>
+        <p class="lead" data-fr>Toute l'équipe de l'Hôtel Dior vous souhaite un excellent séjour entre le fleuve et l'océan. Retrouvez ici le restaurant, nos services et nos excursions.</p>
+        <p class="lead" data-en>The whole Hôtel Dior team wishes you a wonderful stay between the river and the ocean. Find our restaurant, services and excursions here.</p>
+        <div class="cards">
+          <div class="card"><span class="e">🍳</span><b data-fr>Petit-déjeuner buffet</b><b data-en>Breakfast buffet</b><span data-fr>Inclus dans votre séjour</span><span data-en>Included in your stay</span></div>
+          <div class="card"><span class="e">🏊</span><b data-fr>Piscine & plage privée</b><b data-en>Pool & private beach</b><span data-fr>Accès libre pour nos clients</span><span data-en>Open to all guests</span></div>
+          <div class="card"><span class="e">🔑</span><b data-fr>Départ avant 12h</b><b data-en>Check-out before 12 PM</b><span data-fr>Départ tardif sur demande</span><span data-en>Late check-out on request</span></div>
+          <div class="card"><span class="e">🌅</span><b data-fr>Coucher du soleil</b><b data-en>Sunset</b><span id="sunset">—</span></div>
+        </div>
+      </div>
+      <div class="qr"><div class="code" id="qrWifi"></div><b>Wi-Fi</b><span data-fr>Scannez pour vous connecter</span><span data-en>Scan to connect</span></div>
+    </section>
+
+    <!-- Restaurant -->
+    <section id="resto">
+      <div class="col">
+        <div class="kicker" data-fr>Cuisine du marché</div><div class="kicker" data-en>Market cuisine</div>
+        <h2 data-fr>Restaurant & bar</h2><h2 data-en>Restaurant & bar</h2>
+        <p class="lead" data-fr>Poissons et fruits de mer de la pêche du jour, grillades et plats du jour. Servi en salle, en terrasse, au bord de la piscine ou en chambre.</p>
+        <p class="lead" data-en>Fish and seafood from the day's catch, grills and dishes of the day. Served indoors, on the terrace, by the pool or in your room.</p>
+        <ul class="dishes" data-fr>
+          <li>Thiéboudiène Penda Mbaye</li><li>Poisson grillé du jour</li><li>Fruits de mer</li><li>Grillades</li>
+          <li>Plat du jour</li><li>Desserts maison</li><li>Dîner en plein air</li><li>Boissons & cocktails au bar</li>
+        </ul>
+        <ul class="dishes" data-en>
+          <li>Thieboudienne Penda Mbaye</li><li>Grilled fish of the day</li><li>Seafood</li><li>Grills</li>
+          <li>Dish of the day</li><li>Homemade desserts</li><li>Open-air dinner</li><li>Drinks & cocktails at the bar</li>
+        </ul>
+        <div class="note" data-fr>Démo : la carte complète avec les prix sera fournie par l'hôtel.</div>
+        <div class="note" data-en>Demo: full menu with prices to be provided by the hotel.</div>
+      </div>
+      <div class="qr"><div class="code" id="qrResto"></div><b data-fr>Commander</b><b data-en>Order</b><span data-fr>Carte et commande sur votre téléphone</span><span data-en>Menu and ordering on your phone</span></div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="col">
+        <div class="kicker" data-fr>À votre service</div><div class="kicker" data-en>At your service</div>
+        <h2 data-fr>Services de l'hôtel</h2><h2 data-en>Hotel services</h2>
+        <div class="cards">
+          <div class="card"><span class="e">🧺</span><b data-fr>Ménage & serviettes</b><b data-en>Housekeeping & towels</b><span data-fr>Sur simple demande</span><span data-en>Just ask</span></div>
+          <div class="card"><span class="e">🕛</span><b data-fr>Départ tardif</b><b data-en>Late check-out</b><span data-fr>Selon disponibilité</span><span data-en>Subject to availability</span></div>
+          <div class="card"><span class="e">🚐</span><b data-fr>Transferts</b><b data-en>Transfers</b><span data-fr>Aéroport, Dakar, centre-ville</span><span data-en>Airport, Dakar, town centre</span></div>
+          <div class="card"><span class="e">🎉</span><b data-fr>Séminaires & événements</b><b data-en>Meetings & events</b><span data-fr>Organisés sur mesure</span><span data-en>Tailor-made</span></div>
+          <div class="card"><span class="e">🏊</span><b data-fr>Piscine</b><b data-en>Pool</b><span data-fr>Eau entre 20 et 30 °C</span><span data-en>Water 20 to 30 °C</span></div>
+          <div class="card"><span class="e">🚗</span><b data-fr>Parking</b><b data-en>Parking</b><span data-fr>Gratuit</span><span data-en>Free</span></div>
+        </div>
+      </div>
+      <div class="qr"><div class="code" id="qrServ"></div><b data-fr>Faire une demande</b><b data-en>Make a request</b><span data-fr>La réception vous répond sur WhatsApp</span><span data-en>The front desk replies on WhatsApp</span></div>
+    </section>
+
+    <!-- Excursions -->
+    <section id="trips">
+      <div class="col">
+        <div class="kicker" data-fr>À découvrir</div><div class="kicker" data-en>To discover</div>
+        <h2 data-fr>Excursions</h2><h2 data-en>Excursions</h2>
+        <div class="cards">
+          <div class="card"><span class="e">🦩</span><b data-fr>Parc du Djoudj</b><b data-en>Djoudj park</b><span data-fr>Oiseaux migrateurs, nov. à avril</span><span data-en>Migrating birds, Nov to April</span></div>
+          <div class="card"><span class="e">🛶</span><b data-fr>Pirogue, Langue de Barbarie</b><b data-en>Canoe, Langue de Barbarie</b><span data-fr>Mangrove et îles du fleuve</span><span data-en>Mangroves and river islands</span></div>
+          <div class="card"><span class="e">🐎</span><b data-fr>Île en calèche</b><b data-en>Island by carriage</b><span data-fr>Guide certifié</span><span data-en>Certified guide</span></div>
+          <div class="card"><span class="e">🎣</span><b data-fr>Guet Ndar</b><b data-en>Guet Ndar</b><span data-fr>Retour des pirogues</span><span data-en>Fishing canoes return</span></div>
+          <div class="card"><span class="e">🚢</span><b data-fr>Croisière Bou El Mogdad</b><b data-en>Bou El Mogdad cruise</b><span data-fr>Vers Podor</span><span data-en>Up to Podor</span></div>
+          <div class="card"><span class="e">🧺</span><b data-fr>Marchés de Sor et Ndar-Toute</b><b data-en>Sor & Ndar-Toute markets</b><span data-fr>Tissus, artisanat</span><span data-en>Fabrics, crafts</span></div>
+        </div>
+      </div>
+      <div class="qr"><div class="code" id="qrTrip"></div><b data-fr>Réserver</b><b data-en>Book</b><span data-fr>Auprès de la réception</span><span data-en>With the front desk</span></div>
+    </section>
+
+    <!-- Infos -->
+    <section id="info">
+      <div class="col">
+        <div class="kicker" data-fr>Bon à savoir</div><div class="kicker" data-en>Good to know</div>
+        <h2 data-fr>Infos pratiques</h2><h2 data-en>Practical info</h2>
+        <div class="cards">
+          <div class="card"><b data-fr>Arrivée</b><b data-en>Check-in</b><span data-fr>À partir de 13h30</span><span data-en>From 1:30 PM</span></div>
+          <div class="card"><b data-fr>Départ</b><b data-en>Check-out</b><span data-fr>Avant 12h</span><span data-en>Before 12 PM</span></div>
+          <div class="card"><b data-fr>Réception</b><b data-en>Front desk</b><span>33 961 31 18</span></div>
+          <div class="card"><b data-fr>Urgences</b><b data-en>Emergencies</b><span data-fr>Police 17 · Pompiers 18 · SAMU 1515</span><span data-en>Police 17 · Fire 18 · Ambulance 1515</span></div>
+        </div>
+        <p class="lead" style="margin-top:1.6rem" data-fr>Un beau séjour ? Votre avis aide d'autres voyageurs à nous trouver. Merci !</p>
+        <p class="lead" style="margin-top:1.6rem" data-en>Enjoyed your stay? Your review helps other travellers find us. Thank you!</p>
+      </div>
+      <div class="qr"><div class="code" id="qrReview"></div><b data-fr>Laisser un avis</b><b data-en>Leave a review</b><span>Google</span></div>
+    </section>
+
+    <div class="hint" data-fr><kbd>▲</kbd> <kbd>▼</kbd> pour naviguer avec la télécommande · <kbd>OK</kbd> pour choisir</div>
+    <div class="hint" data-en><kbd>▲</kbd> <kbd>▼</kbd> to navigate with the remote · <kbd>OK</kbd> to select</div>
+    <div class="demo">Démo Kanzu Digital · non officielle</div>
+  </main>
+</div>
+
+<script>
+/* ====== Données de l'hôtel (à valider) ====== */
+var CONFIG = {
+  wa: "221784685343",                       // WhatsApp réception
+  wifiSsid: "HOTEL_DIOR", wifiPass: "demo1234", // DÉMO : à remplacer par le vrai Wi-Fi
+  lat: 15.9978, lng: -16.5103,
+  review: "https://maps.google.com/?cid=8437577842977840301",
+  menuUrl: "https://abdulhakiiim.github.io/darousalam-menu/demo-dior/#resto"
+};
+/* ============================================ */
+
+var q = new URLSearchParams(location.search);
+var room = q.get("ch") || q.get("room") || "";
+var guest = q.get("nom") || "";
+var lang = q.get("lang") === "en" ? "en" : "fr";
+function L(fr, en){ return lang === "fr" ? fr : en; }
+function wa(fr, en){ return "https://wa.me/" + CONFIG.wa + "?text=" + encodeURIComponent(L(fr, en) + (room ? L(" (chambre " + room + ")", " (room " + room + ")") : "")); }
+
+function qr(id, text){
+  var el = document.getElementById(id); el.innerHTML = "";
+  if (window.qrcode) {
+    qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"];
+    var c = qrcode(0, "M"); c.addData(text); c.make();
+    el.innerHTML = c.createSvgTag({ cellSize: 6, margin: 0, scalable: true });
+  }
+  else { el.textContent = text; el.style.fontSize = ".8rem"; el.style.wordBreak = "break-all"; }
+}
+function esc(s){ return s.replace(/([\\;,:"])/g, "\\$1"); }
+
+function render(){
+  document.body.classList.toggle("en", lang === "en");
+  document.documentElement.lang = lang;
+  document.getElementById("roomLbl").textContent = room ? L("Chambre ", "Room ") + room : "";
+  document.getElementById("guest").textContent = guest ? ", " + guest : "";
+  document.getElementById("waTxt").textContent = "+" + CONFIG.wa.replace(/^221(\d{2})(\d{3})(\d{2})(\d{2})$/, "221 $1 $2 $3 $4");
+  qr("qrWifi", "WIFI:T:WPA;S:" + esc(CONFIG.wifiSsid) + ";P:" + esc(CONFIG.wifiPass) + ";;");
+  qr("qrResto", wa("Bonjour, je souhaite commander / réserver une table :", "Hello, I'd like to order / book a table:"));
+  qr("qrServ", wa("Bonjour, j'ai une demande :", "Hello, I have a request:"));
+  qr("qrTrip", wa("Bonjour, je souhaite réserver une excursion :", "Hello, I'd like to book an excursion:"));
+  qr("qrReview", CONFIG.review);
+  tick(); weather();
+}
+
+/* Horloge */
+function tick(){
+  var d = new Date();
+  document.getElementById("time").textContent = d.toLocaleTimeString(L("fr-FR","en-GB"), { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Dakar" });
+  document.getElementById("date").textContent = d.toLocaleDateString(L("fr-FR","en-GB"), { weekday: "long", day: "numeric", month: "long", timeZone: "Africa/Dakar" });
+}
+setInterval(tick, 15000);
+
+/* Météo et coucher du soleil (Open-Meteo, sans clé) */
+var wx = null;
+function weather(){
+  function show(){
+    if (!wx) return;
+    document.getElementById("weather").textContent = Math.round(wx.current.temperature_2m) + " °C · " + L("vent ", "wind ") + Math.round(wx.current.wind_speed_10m) + " km/h";
+    var s = wx.daily.sunset[0].slice(11, 16);
+    document.getElementById("sunset").textContent = L("Aujourd'hui à ", "Today at ") + s;
+  }
+  if (wx) return show();
+  fetch("https://api.open-meteo.com/v1/forecast?latitude=" + CONFIG.lat + "&longitude=" + CONFIG.lng + "&current=temperature_2m,wind_speed_10m&daily=sunset&timezone=Africa%2FDakar&forecast_days=1")
+    .then(function(r){ return r.json(); }).then(function(j){ wx = j; show(); }).catch(function(){});
+}
+setInterval(function(){ wx = null; weather(); }, 30 * 60000);
+
+/* Navigation à la télécommande */
+var navs = [].slice.call(document.querySelectorAll(".nav"));
+var idx = 0;
+function focusNav(i){ idx = (i + navs.length) % navs.length; navs[idx].focus(); }
+function open(name){
+  if (name === "lang"){ lang = lang === "fr" ? "en" : "fr"; render(); return; }
+  navs.forEach(function(n){ n.classList.toggle("on", n.dataset.s === name); });
+  [].forEach.call(document.querySelectorAll("section"), function(s){ s.classList.toggle("on", s.id === name); });
+}
+navs.forEach(function(n, i){
+  n.addEventListener("click", function(){ idx = i; open(n.dataset.s); });
+  n.addEventListener("focus", function(){ idx = i; if (n.dataset.s !== "lang") open(n.dataset.s); });
+});
+document.addEventListener("keydown", function(e){
+  var k = e.key || e.keyCode;
+  if (k === "ArrowDown" || k === 40 || k === "ArrowRight" || k === 39){ focusNav(idx + 1); e.preventDefault(); }
+  else if (k === "ArrowUp" || k === 38 || k === "ArrowLeft" || k === 37){ focusNav(idx - 1); e.preventDefault(); }
+  else if (k === "Enter" || k === 13){ open(navs[idx].dataset.s); e.preventDefault(); }
+  resetIdle();
+});
+
+/* Retour à l'accueil après 3 minutes sans action */
+var idle;
+function resetIdle(){ clearTimeout(idle); idle = setTimeout(function(){ focusNav(0); open("home"); }, 180000); }
+
+render(); focusNav(0); resetIdle();
+</script>
+</body>
+</html>
